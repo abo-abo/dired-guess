@@ -77,9 +77,14 @@
 
 ;;* Linting
 (dig-connect
- '("xml" "xml.rels") '(format "xmllint --format %s --output %s" file file))
+ '("xml" "xml.rels")
+ '(format "xmllint --format %s --output %s"
+   (shell-quote-argument file)
+   (shell-quote-argument file)))
 (dig-connect
- "json" '(format "python -m json.tool %s | sponge %s" file file))
+ "json" '(format "python -m json.tool %s | sponge %s"
+          (shell-quote-argument file)
+          (shell-quote-argument file)))
 (dig-connect
  "py" "autopep8 -i")
 
