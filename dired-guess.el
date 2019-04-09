@@ -79,7 +79,7 @@
 (dig-connect
  '("xml" "xml.rels") '(format "xmllint --format %s --output %s" file file))
 (dig-connect
- "json" "python -m json.tool > indented.json")
+ "json" '(format "python -m json.tool %s | sponge %s" file file))
 (dig-connect
  "py" "autopep8 -i")
 
