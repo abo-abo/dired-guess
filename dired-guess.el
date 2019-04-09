@@ -52,24 +52,27 @@
      `(,re ,@progs))))
 
 ;;;###autoload
-(defun dig-start (cmd &optional file-list)
+(defun dig-start (cmd &rest file-list)
   "Run CMD on FILE-LIST using nohup."
   (interactive
-   (let ((files (dired-get-marked-files t nil)))
-     (list
-      (if current-prefix-arg
-          (dired-read-shell-command "& on %s: " nil files)
-        (let ((prog (dired-guess-default files)))
-          (if (consp prog)
-              (car prog)
-            prog)))
-      files)))
+   (let* ((files (dired-get-marked-files t nil))
+          (cmd (if current-prefix-arg
+                   (dired-read-shell-command "& on %s: " nil files)
+                 (let ((prog (dired-guess-default files)))
+                   (if (consp prog)
+                       (car prog)
+                     prog)))))
+     (if (cl-search (car files) cmd)
+         (list cmd)
+       (cons cmd files))))
   (start-process
    cmd nil shell-file-name
    shell-command-switch
-   (format
-    "nohup 1>/dev/null 2>/dev/null %s %s"
+   (concat
+    (unless (string-match-p "|" cmd)
+      "nohup 1>/dev/null 2>/dev/null ")
     cmd
+    " "
     (mapconcat #'shell-quote-argument file-list " "))))
 
 ;;* Linting
