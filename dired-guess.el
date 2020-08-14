@@ -5,7 +5,7 @@
 ;; Author: Oleh Krehel <ohwoeowho@gmail.com>
 ;; URL: https://github.com/abo-abo/dired-guess
 ;; Version: 0.1.0
-;; Package-Requires: ((emacs "24.3"))
+;; Package-Requires: ((emacs "24.3") (orly "0.1.0"))
 ;; Keywords: programs, utility
 
 ;; This file is not part of GNU Emacs.
@@ -37,6 +37,7 @@
 
 ;;* Functions
 (require 'dired-x)
+(require 'orly)
 
 (defun dig-connect (exts &rest progs)
   "Connect a list EXTS to a list PROGS that can open them."
@@ -52,28 +53,7 @@
      `(,re ,@progs))))
 
 ;;;###autoload
-(defun dig-start (cmd &rest file-list)
-  "Run CMD on FILE-LIST using nohup."
-  (interactive
-   (let* ((files (dired-get-marked-files t nil))
-          (cmd (if current-prefix-arg
-                   (dired-read-shell-command "& on %s: " nil files)
-                 (let ((prog (dired-guess-default files)))
-                   (if (consp prog)
-                       (car prog)
-                     prog)))))
-     (if (cl-search (car files) cmd)
-         (list cmd)
-       (cons cmd files))))
-  (start-process
-   cmd nil shell-file-name
-   shell-command-switch
-   (concat
-    (unless (string-match-p "|" cmd)
-      "nohup 1>/dev/null 2>/dev/null ")
-    cmd
-    " "
-    (mapconcat #'shell-quote-argument file-list " "))))
+(defalias 'dig-start 'orly-start)
 
 ;;* Linting
 (dig-connect
