@@ -62,6 +62,11 @@
    (shell-quote-argument file)
    (shell-quote-argument file)))
 (dig-connect
+ '("html")
+ '(format "xmllint --format --html %s --output %s"
+   (shell-quote-argument file)
+   (shell-quote-argument file)))
+(dig-connect
  "json" '(format "python -m json.tool %s | sponge %s"
           (shell-quote-argument file)
           (shell-quote-argument file)))
