@@ -80,7 +80,7 @@
 
 ;;* Media
 (dig-connect
- '("jpg" "jpeg" "png" "svg" "gif" "tiff" "xpm" "bmp")
+ '("jpg" "jpeg" "png" "svg" "gif" "tiff" "xpm" "bmp" "ico")
  "eog")
 
 (dig-connect
