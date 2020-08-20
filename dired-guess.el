@@ -84,11 +84,11 @@
  "eog")
 
 (dig-connect
- '("mp4" "mkv" "mpg" "m4v" "avi" "flv" "ogv" "ifo" "wmv" "webm" "part")
+ '("mp3" "mp4" "mkv" "mpg" "m4v" "avi" "flv" "ogv" "ifo" "wmv" "webm" "part" "MOV")
  "vlc")
 
 (dig-connect
- '("mp3" "flac" "wv")
+ '("flac" "wv")
  "rhythmbox")
 
 (dig-connect "epub" "calibre")
