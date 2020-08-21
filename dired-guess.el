@@ -98,7 +98,7 @@
 (dig-connect "xcf" "gimp")
 (dig-connect
  '("odt" "ods" "csv"
-   "pptx" "emf" "xls" "xlsx" "xlsb" "xlsm" "doc" "docx")
+   "pptx" "emf" "wmf" "xls" "xlsx" "xlsb" "xlsm" "doc" "docx" "rtf")
  "libreoffice")
 (dig-connect
  "tex"
