@@ -114,6 +114,10 @@
 (dig-connect
  "" "nautilus")
 
+(dig-connect
+ "sqlite"
+ "sqlitebrowser")
+
 (provide 'dired-guess)
 
 ;;; dired-guess.el ends here
