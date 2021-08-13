@@ -118,6 +118,10 @@
  "sqlite"
  "sqlitebrowser")
 
+(dig-connect
+ "crt"
+ "openssl x509 -text -noout -in")
+
 (provide 'dired-guess)
 
 ;;; dired-guess.el ends here
