@@ -70,6 +70,15 @@
  "json" '(format "python -m json.tool %s | sponge %s"
           (shell-quote-argument file)
           (shell-quote-argument file)))
+
+(dig-connect
+ "md" '(format
+        "pandoc -f markdown -t org -o %s --columns=100 %s && emacs %s -batch -l ~/.emacs -f ora-clean-up-pandoc"
+        (shell-quote-argument (replace-regexp-in-string "md\\'" "org" file))
+        (shell-quote-argument file)
+        (shell-quote-argument (replace-regexp-in-string "md\\'" "org" file))))
+
+
 (dig-connect
  "py" "autopep8 -i")
 
