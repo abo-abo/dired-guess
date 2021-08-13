@@ -37,20 +37,20 @@
 
 ;;* Functions
 (require 'dired-x)
-(require 'orly)
 
 (defun dig-connect (exts &rest progs)
   "Connect a list EXTS to a list PROGS that can open them."
   (when (stringp exts)
     (setq exts (list exts)))
-  (let ((re
-         (concat
-          "\\."
-          (regexp-opt exts)
-          "\\'")))
-    (add-to-list
-     'dired-guess-shell-alist-user
-     `(,re ,@progs))))
+  (let* ((re
+          (concat
+           "\\."
+           (regexp-opt exts)
+           "\\'"))
+         (cell (assoc re dired-guess-shell-alist-user)))
+    (if cell
+        (setf (cdr cell) progs)
+      (add-to-list 'dired-guess-shell-alist-user (cons re progs)))))
 
 ;;;###autoload
 (defalias 'dig-start 'orly-start)
