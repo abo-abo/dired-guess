@@ -91,7 +91,7 @@
  '("flac" "wv")
  "rhythmbox")
 
-(dig-connect "epub" "calibre")
+(dig-connect "epub" "ebook-viewer")
 (dig-connect "html" "firefox")
 
 ;;* Editing
